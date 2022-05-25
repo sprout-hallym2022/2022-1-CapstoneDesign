@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `sprout`.`Disease` (
+  `diabetes` INT NOT NULL,
+  `hypertension` INT NOT NULL,
+  PRIMARY KEY (`diabetes`, `hypertension`),
+  INDEX `fk_Disease_Blood_Pressure1_idx` (`hypertension` ASC) VISIBLE,
+  CONSTRAINT `fk_Disease_Lipids1`
+    FOREIGN KEY (`diabetes`)
+    REFERENCES `sprout`.`Lipids` (`diabetes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Disease_Blood_Pressure1`
+    FOREIGN KEY (`hypertension`)
+    REFERENCES `sprout`.`Blood_Pressure` (`hypertension`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
