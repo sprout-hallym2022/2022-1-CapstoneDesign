@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `sprout`.`Lipids` (
+  `TCHL` INT NOT NULL,
+  `LDLC` INT NULL,
+  `HDLC` INT NULL,
+  `TG` INT NULL,
+  `diabetes` INT NULL,
+  PRIMARY KEY (`TCHL`))
+ENGINE = InnoDB;
