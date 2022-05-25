@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `sprout`.`Blood_Pressure` (
+  `SBP` INT NOT NULL,
+  `DBP` INT NOT NULL,
+  `hypertension` INT NULL,
+  PRIMARY KEY (`SBP`, `DBP`))
+ENGINE = InnoDB;
