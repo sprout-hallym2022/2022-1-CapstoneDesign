@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS `sprout`.`Patients` (
+  `patients_id` VARCHAR(45) NOT NULL,
+  `sex` CHAR(10) NOT NULL,
+  `age` INT NOT NULL,
+  `height` INT NOT NULL,
+  `weight` INT NOT NULL,
+  `Lipids_TCHL` INT NOT NULL,
+  `Blood_Pressure_SBP` INT NOT NULL,
+  `Blood_Pressure_DBP` INT NOT NULL,
+  `Disease_diabetes` INT NOT NULL,
+  `Disease_hypertension` INT NOT NULL,
+  PRIMARY KEY (`patients_id`, `Lipids_TCHL`, `Blood_Pressure_SBP`, `Blood_Pressure_DBP`, `Disease_diabetes`, `Disease_hypertension`),
+  UNIQUE INDEX `patients_id_UNIQUE` (`patients_id` ASC) VISIBLE,
+  INDEX `fk_Patients_Lipids1_idx` (`Lipids_TCHL` ASC) VISIBLE,
+  INDEX `fk_Patients_Blood_Pressure1_idx` (`Blood_Pressure_SBP` ASC, `Blood_Pressure_DBP` ASC) VISIBLE,
+  INDEX `fk_Patients_Disease1_idx` (`Disease_diabetes` ASC, `Disease_hypertension` ASC) VISIBLE,
+  CONSTRAINT `fk_Patients_Lipids1`
+    FOREIGN KEY (`Lipids_TCHL`)
+    REFERENCES `sprout`.`Lipids` (`TCHL`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Patients_Blood_Pressure1`
+    FOREIGN KEY (`Blood_Pressure_SBP` , `Blood_Pressure_DBP`)
+    REFERENCES `sprout`.`Blood_Pressure` (`SBP` , `DBP`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Patients_Disease1`
+    FOREIGN KEY (`Disease_diabetes` , `Disease_hypertension`)
+    REFERENCES `sprout`.`Disease` (`diabetes` , `hypertension`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
