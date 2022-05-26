@@ -1,0 +1,87 @@
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`disease`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS ` `sprout`.`disease` (
+  `diabetes` INT NOT NULL,
+  `hypertension` INT NOT NULL,
+  PRIMARY KEY (`diabetes`, `hypertension`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`blood_pressure`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sprout`.`blood_pressure` (
+  `SBP` INT NOT NULL,
+  `DBP` INT NOT NULL,
+  `hypertension` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`SBP`, `DBP`),
+  CONSTRAINT `fk_blood_pressure_disease1`
+    FOREIGN KEY (`SBP` , `DBP`)
+    REFERENCES `mydb`.`disease` (`hypertension` , `hypertension`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`lipids`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS  `sprout`.`lipids` (
+  `TCHL` INT NOT NULL,
+  `LDLC` INT NULL DEFAULT NULL,
+  `HDLC` INT NULL DEFAULT NULL,
+  `TG` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`TCHL`),
+  CONSTRAINT `fk_Lipids_Disease2`
+    FOREIGN KEY (`TCHL`)
+    REFERENCES `mydb`.`disease` (`diabetes`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`patients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sprout`.`patients` (
+  `patients_id` VARCHAR(45) NOT NULL,
+  `sex` CHAR(10) NOT NULL,
+  `age` INT NOT NULL,
+  `height` INT NOT NULL,
+  `weight` INT NOT NULL,
+  `Lipids_TCHL` INT NOT NULL,
+  `blood_pressure_SBP` INT NOT NULL,
+  `blood_pressure_DBP` INT NOT NULL,
+  PRIMARY KEY (`patients_id`, `Lipids_TCHL`, `blood_pressure_SBP`, `blood_pressure_DBP`),
+  CONSTRAINT `fk_Patients_Lipids1`
+    FOREIGN KEY (`Lipids_TCHL`)
+    REFERENCES `mydb`.`lipids` (`TCHL`),
+  CONSTRAINT `fk_patients_blood_pressure1`
+    FOREIGN KEY (`blood_pressure_SBP` , `blood_pressure_DBP`)
+    REFERENCES `mydb`.`blood_pressure` (`SBP` , `DBP`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
