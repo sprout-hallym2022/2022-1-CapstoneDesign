@@ -67,7 +67,7 @@
             <?php 
               $lockimg = "<img src='/img/lock.png' Patients_id='20' SEX='20' AGE='20' HEIGHT='20' WEIGHT='20' Lipids_TCHL='20' blood_pressure_SBP='20' blood_pressure_DBP='20' />";
               if($board['lock_post']=="1")
-              { ?><a href='/login_server.php?idx=<?php echo $board["idx"];?>'><?php echo $Patients_id;
+              { ?><a href='/templates/account/login_server.phpt/login_server.php?idx=<?php echo $board["idx"];?>'><?php echo $Patients_id;
               }else{?>
 
        
@@ -85,7 +85,7 @@
     </table>
     <!-- 18.10.11 검색 추가 -->
     <div id="search_box2">
-      <form action="/search_result.php" method="get">
+      <form action="/templates/account/search_result.php" method="get">
       <select name="catgo">
       <option value = "Patients_id">환자아이디</option>
                   <option value = "SEX">성별</option>

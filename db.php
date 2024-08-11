@@ -22,7 +22,7 @@
       <h1>유전체 게시판</h1>
       <h4>유전체를 자유롭게 찾을 수 있는 게시판입니다.</h4>
       <div id="search_box">
-          <form action = "/search_result.php" method = "get">
+          <form action = "/templates/account/search_result.php" method = "get">
               <select name = "catgo">
                   <option value = "Patients_id">환자아이디</option>
                   <option value = "SEX">성별</option>
