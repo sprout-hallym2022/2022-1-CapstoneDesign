@@ -3,7 +3,12 @@ package com.example.geneweb.entity.account;
 import com.example.geneweb.entity.AccountResearch;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -11,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,5 +39,35 @@ public class Account {
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AccountResearch> accountResearches;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (authority != null) {
+            String role = authority.getAuthority();
+            return Collections.singleton(new SimpleGrantedAuthority(role));
+        } else {
+            return Collections.emptySet();
+        }
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 
 }
