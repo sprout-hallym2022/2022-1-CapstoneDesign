@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
-@Service // AccountService
+@Service
 public class JpaUserDetailsManger implements UserDetailsManager {
     private final AccountRepository accountRepository;
 
