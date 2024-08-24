@@ -27,7 +27,7 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (authority != null) {
+        if (authority.getAuthority() != null) {
             String role = authority.getAuthority();
             return Collections.singleton(new SimpleGrantedAuthority(role));
         } else {
@@ -47,7 +47,7 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -62,6 +62,6 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
